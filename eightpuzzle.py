@@ -59,7 +59,7 @@ class EightPuzzleState:
                 if self.cells[row][col] == 0:
                     self.blankLocation = row, col
 
-    def isGoal( self ):
+    def isGoal( self ): # verifica daca puzzle ul este rezolvat
         """
           Checks to see if the puzzle is in its goal state.
 
