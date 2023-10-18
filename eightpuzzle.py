@@ -85,6 +85,7 @@ class EightPuzzleState:
                 current += 1
         return True
 
+    # ar trebui sa fim atenti la asta
     def legalMoves( self ):
         """
           Returns a list of legal moves from the current state.

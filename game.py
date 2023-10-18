@@ -211,6 +211,8 @@ class Grid:
     def deepCopy(self):
         return self.copy()
 
+    # sounds cool
+
     def shallowCopy(self):
         g = Grid(self.width, self.height)
         g.data = self.data
