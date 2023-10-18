@@ -25,9 +25,9 @@ import time, os
 import traceback
 import sys
 
-#######################
+########################
 # Parts worth reading #
-#######################
+########################
 #Hmm suna interesant!:)
 class Agent:
     """
