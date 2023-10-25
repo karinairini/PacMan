@@ -113,8 +113,39 @@ def depthFirstSearch(problem):
     print("Start:", problem.getStartState())
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    stack = util.Stack()  # Utilizing the stack data structure from the 'util' module
+
+    # Create a set to keep track of visited nodes
+    visited = set()
+
+    # Push the start state onto the stack as a tuple (state, actions)
+    stack.push((problem.getStartState(), []))
+
+    while not stack.isEmpty():
+        state, actions = stack.pop()
+
+        # Check if the current state is the goal state
+        if problem.isGoalState(state):
+            return actions
+
+        # Mark the current state as visited
+        visited.add(state)
+
+        # Get the next possible actions from the current state
+        possible_actions = problem.getActions(state)
+
+        for action in possible_actions:
+            # Get the next state and calculate the cost
+            next_state = problem.getNextState(state, action)
+            cost = problem.getActionCost(state, action, next_state)
+
+            # Check if the next state has not been visited
+            if next_state not in visited:
+                # Push the next state and actions onto the stack
+                stack.push((next_state, actions + [action]))
+
+    # If the stack is empty and no goal state is found, return an empty list
+    return []
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
@@ -161,8 +192,43 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    priority_queue = util.PriorityQueue()  # Utilizing the priority queue data structure from the 'util' module
+
+    # Create a set to keep track of visited nodes
+    visited = set()
+
+    # Push the start state onto the priority queue with a priority of 0 (initial cost) and empty list of actions
+    priority_queue.push((problem.getStartState(), [], 0), 0)
+
+    while not priority_queue.isEmpty():
+        state, actions, cost = priority_queue.pop()
+
+        # Check if the current state is the goal state
+        if problem.isGoalState(state):
+            return actions
+
+        # Mark the current state as visited
+        visited.add(state)
+
+        # Get the next possible actions from the current state
+        possible_actions = problem.getActions(state)
+
+        for action in possible_actions:
+            # Get the next state and calculate the action cost and heuristic cost
+            next_state = problem.getNextState(state, action)
+            action_cost = problem.getActionCost(state, action, next_state)
+            heuristic_cost = heuristic(next_state, problem)
+
+            # Calculate the total cost (action cost + heuristic cost)
+            total_cost = cost + action_cost + heuristic_cost
+
+            # Check if the next state has not been visited
+            if next_state not in visited:
+                # Push the next state, actions, and total cost onto the priority queue
+                priority_queue.push((next_state, actions + [action], cost + action_cost), total_cost)
+
+    # If the priority queue is empty and no goal state is found, return an empty list
+    return []
 
 
 # Abbreviations
