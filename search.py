@@ -147,6 +147,7 @@ def depthFirstSearch(problem):
     # If the stack is empty and no goal state is found, return an empty list
     return []
 
+
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     stack = util.Stack()
@@ -182,6 +183,7 @@ def breadthFirstSearch(problem):
 
     # If the stack is empty and no goal state is found, return an empty list
     return []
+
 
 def nullHeuristic(state, problem=None):
     """
