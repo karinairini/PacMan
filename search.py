@@ -149,17 +149,16 @@ def depthFirstSearch(problem):
 
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    stack = util.Stack()
+    queue = util.Queue()  # Using a queue for BFS
 
     # Create a set to keep track of visited nodes
     visited = set()
 
-    # Push the start state onto the stack as a tuple (state, actions)
-    stack.push((problem.getStartState(), []))
+    # Push the start state onto the queue as a tuple (state, actions)
+    queue.push((problem.getStartState(), []))
 
-    while not stack.isEmpty():
-        state, actions = stack.pop()
+    while not queue.isEmpty():
+        state, actions = queue.pop()
 
         # Check if the current state is the goal state
         if problem.isGoalState(state):
@@ -178,10 +177,10 @@ def breadthFirstSearch(problem):
 
             # Check if the next state has not been visited
             if next_state not in visited:
-                # Push the next state and actions onto the stack
-                stack.push((next_state, actions + [action]))
+                # Push the next state and actions onto the queue
+                queue.push((next_state, actions + [action]))
 
-    # If the stack is empty and no goal state is found, return an empty list
+    # If the queue is empty and no goal state is found, return an empty list
     return []
 
 
